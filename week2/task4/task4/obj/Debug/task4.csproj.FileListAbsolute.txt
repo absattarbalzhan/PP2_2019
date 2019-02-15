@@ -4,3 +4,4 @@ C:\Users\Айгуль\Desktop\pp2\week2\task4\task4\bin\Debug\task4.pdb
 C:\Users\Айгуль\Desktop\pp2\week2\task4\task4\obj\Debug\task4.csproj.CoreCompileInputs.cache
 C:\Users\Айгуль\Desktop\pp2\week2\task4\task4\obj\Debug\task4.exe
 C:\Users\Айгуль\Desktop\pp2\week2\task4\task4\obj\Debug\task4.pdb
+C:\Users\Айгуль\Desktop\pp2\week2\task4\task4\obj\Debug\task4.csprojAssemblyReference.cache

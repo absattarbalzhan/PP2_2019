@@ -11,7 +11,7 @@ namespace task4
     {
         static void Main(string[] args)
         {
-            string fileName = "POP.txt"; // имя файла который я хочу создать
+            string fileName = "56.txt"; // имя файла который я хочу создать
             string PathString = @"C:\Users\Айгуль\Desktop\pp2\week2"; // и где я его хочу создать
             PathString = Path.Combine(PathString, fileName); // нужно скомбинировать их пути
             FileStream fs = File.Create(PathString); // и создаем файл

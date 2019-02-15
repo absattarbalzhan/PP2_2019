@@ -11,11 +11,11 @@ namespace Part2
     {
         static void Main(string[] args)
         {
-            far FarManager = new far();
-            FarManager.Start(@"C:\Users\Айгуль\Desktop\pp2");
+            far FarManager = new far();                                //создаем новый Far MAnager
+            FarManager.Start(@"C:\Users\Айгуль\Desktop\pp2");          // указываем путь
         }
     }
-    class far
+    class far                                                  //создаем новый класс
     {
         public int cursor;
         public int size;
@@ -25,59 +25,59 @@ namespace Part2
             cursor = 0;
             ok = true;
         }
-        public void Delete(FileSystemInfo fs)
+        public void Delete(FileSystemInfo fs)                                   // функция для удаления
         {
             if (fs.GetType() == typeof(DirectoryInfo))
-                Directory.Delete(fs.FullName, true);
+                Directory.Delete(fs.FullName, true);                      //удаляем папку даже если она содержит что-либо
             else
             {
-                FileInfo file = new FileInfo(fs.FullName);
+                FileInfo file = new FileInfo(fs.FullName);                      //удаляем файл
                 fs.Delete();
             }
         }
-        public void TextFile(string path)
+        public void TextFile(string path)                                       //для чтения тектовых файлов 
         {
-            Console.Clear();
-            StreamReader sr = new StreamReader(path);
-            string s = sr.ReadToEnd();
-            Console.WriteLine(s);
+            Console.Clear();                                                    //очистить консоль
+            StreamReader sr = new StreamReader(path);                           
+            string s = sr.ReadToEnd();                                          //read all
+            Console.WriteLine(s);                                               //пишем в консоле
             ConsoleKeyInfo k = Console.ReadKey();
-            if (k.Key == ConsoleKey.Escape)
+            if (k.Key == ConsoleKey.Escape)                                     //ESC, чтобы закрыть текстовый фаул
             {
-                sr.Close();
+                sr.Close();                                                     
                 return;
             }
             else
-                TextFile(path);
+                TextFile(path);                                //иначе показать текстовый файл
         }
-        public void Up()
+        public void Up()                                        //курсор вверх- кнопка ввверх
         {
             cursor--;
             if (cursor < 0)
                 cursor = size - 1;
         }
-        public void Down()
+        public void Down()                                 //курсор вниз - кнопка вниз
         {
             cursor++;
             if (cursor == size)
                 cursor = 0;
         }
-        public void Color(FileSystemInfo file, int index)
+        public void Color(FileSystemInfo file, int index)            //создаем функцию,которая менят цвета
         {
             if (index == cursor)
-                Console.BackgroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Blue;
             else if (file.GetType() == typeof(DirectoryInfo))
             {
-                Console.ForegroundColor = ConsoleColor.Blue;// если открывается папка, то цвет синий 
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Black;
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Green;//если это файл, то он окрашивается в зеленый
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.BackgroundColor = ConsoleColor.Black;
             }
         }
-        public void Show(string path)
+        public void Show(string path)                         //создаем функцию, которая показывает файлы
         {
             DirectoryInfo directory = new DirectoryInfo(path);
             FileSystemInfo[] files = directory.GetFileSystemInfos();
@@ -93,19 +93,19 @@ namespace Part2
         public void Start(string path)
         {
 
-            ConsoleKeyInfo key = Console.ReadKey();
+            ConsoleKeyInfo key = Console.ReadKey();                                 
             FileSystemInfo fs = null;
-            while (key.Key != ConsoleKey.E)
+            while (key.Key != ConsoleKey.E)                      //работает до тех пор пока не нажмем на Е
             {
                 DirectoryInfo directory = new DirectoryInfo(path);
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.Clear();
-                Show(path);
+                Show(path);                                              //вызываем функцию Show
                 if (size != 0)
                 {
                     key = Console.ReadKey();
-                    fs = directory.GetFileSystemInfos()[cursor];
-                    if (key.Key == ConsoleKey.Enter)
+                    fs = directory.GetFileSystemInfos()[cursor];          //файл на который указан курсор
+                    if (key.Key == ConsoleKey.Enter)                                
                     {
                         if (fs.GetType() == typeof(DirectoryInfo))
                         {
@@ -137,7 +137,7 @@ namespace Part2
                         if (fs.GetType() == typeof(DirectoryInfo))
                             Directory.Move(fs.FullName, s);
                         else
-                            File.Move(fs.FullName, s);
+                            File.Move(fs.FullName, s);             //чтобы переименовать была использована функция move
                     }
                     else if (key.Key == ConsoleKey.UpArrow)
                         Up();
@@ -149,7 +149,7 @@ namespace Part2
                     key = Console.ReadKey();
                     if (key.Key == ConsoleKey.Escape)
                     {
-                        directory = directory.Parent;
+                        directory = directory.Parent;// выводит даже снаружи папки
                         path = directory.FullName;
                         cursor = 0;
                     }
